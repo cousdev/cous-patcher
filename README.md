@@ -1,4 +1,4 @@
-# Cous Launcher
+# Cous Patcher
 This utility allows you to patch a .app file to run under a different process name on macOS.
 
 > [!WARNING]
@@ -13,12 +13,12 @@ For those looking to compile it themselves, ensure you have `make` and `clang`, 
 
 ## Usage
 ```bash
-./cl [path to .app] [new process name]
+./cous [path to .app] [new process name]
 ```
 
 For example:
 ```bash
-./cl '/Users/27corm/Desktop/Steam.app' not_steam
+./cous '/Users/27corm/Desktop/Steam.app' not_steam
 ```
 
 The program will output a patched version of the original .app in the current working directory.
