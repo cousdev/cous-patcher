@@ -42,4 +42,4 @@ cmake ..
 make
 ```
 
-You can also find a prebuilt release for macOS in the Releases tab (ARM only). Worth noting that it should still compile fine on Intel.
+You can also find a prebuilt release for macOS in the Releases tab (ARM only). For Intel users, please build from source with the instructions listed above.
