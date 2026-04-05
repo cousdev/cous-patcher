@@ -4,24 +4,16 @@ This utility allows you to patch a .app file to run under a different process na
 > [!WARNING]
 > Apps that break under ad-hoc signing such as App Store apps, system apps protected under SIP, etc will not work.
 
+> [!NOTE]
+> On first launch, macOS may block the app. Right-click, the app and select **Open**, then click **Open** on the dialog.
+> You can also use the command line by running `xattr -d com.apple.quarantine [file_path]`.
+
 ## Prerequisites
 This tool uses the macOS `codesign` utility, which is part of the Xcode Command Line Tools. If you don't have them already, install them with `xcode-select --install`.
 
 ---
 
-For those looking to compile it themselves, ensure you have `make` and `clang`, which is part of the Xcode Command Line Tools. You will also require `cmake`, which you can get from `brew` or from the CMake website.
-
-## Usage
-```bash
-./cous [path to .app] [new process name]
-```
-
-For example:
-```bash
-./cous '/Users/27corm/Desktop/Steam.app' not_steam
-```
-
-The program will output a patched version of the original .app in the current working directory.
+For those looking to compile it themselves, ensure you have `make` and `clang`, which is part of the Xcode Command Line Tools. You will require `cmake`, which you can get from `brew` or from the CMake website. This project uses Slint for UI, which requires Rust and Cargo to be installed and present in your path.
 
 ## How it works
 
@@ -33,7 +25,7 @@ The program will output a patched version of the original .app in the current wo
 6. Patch CFBundleName and CFBundleExecutable in Info.plist
 
 ## Build instructions
-This project uses the CMake build system.
+This project uses the CMake build system. First build may take some time due to compiling dependencies.
 
 ```bash
 mkdir build

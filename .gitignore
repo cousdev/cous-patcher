@@ -27,3 +27,6 @@ Temporary Items
 
 # Build directory
 build/
+
+# VS Code settings
+.vscode/

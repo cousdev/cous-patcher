@@ -1,0 +1,94 @@
+import { Button, LineEdit, ScrollView, VerticalBox, HorizontalBox, TextEdit } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    title: "Cous Patcher";
+    min-width: 560px;
+    min-height: 420px;
+    preferred-width: 600px;
+    preferred-height: 480px;
+    background: #f0f0f0;
+
+    // Callbacks into C++
+    callback browse-clicked();
+    callback patch-clicked(string, string);
+
+    // Properties set from C++
+    in-out property <string> app-path;
+    in-out property <string> fake-name;
+    in property <string> log-text;
+    in-out property <bool>   patching;
+
+    VerticalBox {
+        padding: 20px;
+        spacing: 12px;
+
+        Text {
+            text: "Target .app";
+            font-size: 16px;
+            color: #000;
+        }
+
+        HorizontalBox {
+            padding: 0px;
+            spacing: 8px;
+
+            LineEdit {
+                placeholder-text: "/Applications/Steam.app";
+                text <=> root.app-path;
+                enabled: !root.patching;
+                horizontal-stretch: 1;
+            }
+
+            Button {
+                text: "Browse";
+                enabled: !root.patching;
+                clicked => { root.browse-clicked(); }
+            }
+        }
+
+        Text {
+            text: "Fake process name";
+            font-size: 16px;
+            color: #000;
+        }
+
+        LineEdit {
+            placeholder-text: "not-steam";
+            text <=> root.fake-name;
+            enabled: !root.patching;
+        }
+
+        Button {
+            text: root.patching ? "Patching..." : "Patch";
+            enabled: !root.patching && root.app-path != "" && root.fake-name != "";
+            clicked => { root.patch-clicked(root.app-path, root.fake-name); }
+        }
+
+        Text {
+            text: "Log";
+            font-size: 16px;
+            color: #000;
+        }
+
+        Rectangle {
+            border-color: #ccc;
+            border-width: 1px;
+            border-radius: 4px;
+            vertical-stretch: 1;
+            clip: true;
+
+            ScrollView {
+                TextEdit {
+                    text: root.log-text;
+                    read-only: true;
+                    wrap: word-wrap;
+                    font-family: "monospace";
+                    font-size: 12px;
+
+                    width: parent.width;
+                    height: parent.height;
+                }
+            }
+        }
+    }
+}
