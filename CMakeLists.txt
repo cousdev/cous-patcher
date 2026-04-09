@@ -56,3 +56,27 @@ target_include_directories(${APP_EXECUTABLE} PRIVATE
 set_source_files_properties(src/file_picker.mm
     PROPERTIES COMPILE_FLAGS "-x objective-c++"
 )
+
+# Install app bundle
+install(TARGETS ${APP_EXECUTABLE}
+    BUNDLE DESTINATION .
+)
+
+# Fix macOS bundle dependencies
+install(CODE "
+    include(BundleUtilities)
+
+    # Construct full app path
+    set(app \"\${CMAKE_INSTALL_PREFIX}/${APP_EXECUTABLE}.app\")
+
+    # Force absolute path (this is the critical fix)
+    get_filename_component(app \"\${app}\" ABSOLUTE)
+
+    message(STATUS \"Fixing bundle: \${app}\")
+
+    fixup_bundle(
+        \"\${app}\"
+        \"\"
+        \"\${CMAKE_INSTALL_PREFIX}/lib\"
+    )
+")

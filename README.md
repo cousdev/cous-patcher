@@ -28,10 +28,10 @@ For those looking to compile it themselves, ensure you have `make` and `clang`, 
 This project uses the CMake build system. First build may take some time due to compiling dependencies.
 
 ```bash
-mkdir build
-cd build
-cmake ..
-make
+cmake -B build
+cmake --build build
+cmake --install build --prefix build/install
+open build/install/cous-patcher.app
 ```
 
-You can also find a prebuilt release for macOS in the Releases tab (ARM only). For Intel users, please build from source with the instructions listed above.
+You can also find a prebuilt release for macOS in the Releases tab (ARM only). For Intel users, please build from source with the instructions listed above. Builds may take more time when building in release mode.
