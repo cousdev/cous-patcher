@@ -2,6 +2,7 @@
 
 #include <thread>
 #include <string>
+#include <iostream>
 
 extern "C" {
 #include "bundle.h"
@@ -22,6 +23,15 @@ static void append_log(slint::ComponentWeakHandle<AppWindow> weak,
     slint::invoke_from_event_loop([weak, snapshot]() {
         if (auto w = weak.lock()) {
             (*w)->set_log_text(slint::SharedString(snapshot));
+        }
+    });
+}
+
+static void update_patch_button(slint::ComponentWeakHandle<AppWindow> weak) {
+    slint::invoke_from_event_loop([weak]() {
+        if (auto w = weak.lock()) {
+            (*w)->set_patching(false);
+            std::cout << "Set patching to false\n";
         }
     });
 }
@@ -88,6 +98,7 @@ static void run_patch(
 
     append_log(weak, log, "Output: " + dest);
     append_log(weak, log, "Patch successful!");
+    update_patch_button(weak);
 }
 
 int main() {
