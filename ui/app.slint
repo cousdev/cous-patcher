@@ -1,4 +1,4 @@
-import { Button, LineEdit, ScrollView, VerticalBox, HorizontalBox, TextEdit } from "std-widgets.slint";
+import { Button, LineEdit, ScrollView, VerticalBox, HorizontalBox, TextEdit, StyleMetrics, AboutSlint, Palette } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     title: "Cous Patcher";
@@ -6,7 +6,7 @@ export component AppWindow inherits Window {
     min-height: 420px;
     preferred-width: 600px;
     preferred-height: 480px;
-    background: #f0f0f0;
+    background: #363636;
 
     // Callbacks into C++
     callback browse-clicked();
@@ -19,18 +19,18 @@ export component AppWindow inherits Window {
     in-out property <bool>   patching;
 
     VerticalBox {
-        padding: 20px;
-        spacing: 12px;
+        padding: 26px;
+        spacing: 16px;
 
         Text {
             text: "Target .app";
-            font-size: 16px;
-            color: #000;
+            font-size: 20px;
+            color: #acacac;
         }
 
         HorizontalBox {
-            padding: 0px;
-            spacing: 8px;
+            padding: 4px;
+            spacing: 12px;
 
             LineEdit {
                 placeholder-text: "/Applications/Steam.app";
@@ -48,8 +48,8 @@ export component AppWindow inherits Window {
 
         Text {
             text: "Fake process name";
-            font-size: 16px;
-            color: #000;
+            font-size: 20px;
+            color: #acacac;
         }
 
         LineEdit {
@@ -59,6 +59,7 @@ export component AppWindow inherits Window {
         }
 
         Button {
+            colorize-icon: true;
             text: root.patching ? "Patching..." : "Patch";
             enabled: !root.patching && root.app-path != "" && root.fake-name != "";
             clicked => { root.patch-clicked(root.app-path, root.fake-name); }
@@ -67,13 +68,14 @@ export component AppWindow inherits Window {
         Text {
             text: "Log";
             font-size: 16px;
-            color: #000;
+            color: #acacac;
         }
 
         Rectangle {
-            border-color: #ccc;
-            border-width: 1px;
-            border-radius: 4px;
+            border-color: #454545;
+            background: #222;
+            border-width: 2px;
+            border-radius: 16px;
             vertical-stretch: 1;
             clip: true;
 
@@ -83,7 +85,7 @@ export component AppWindow inherits Window {
                     read-only: true;
                     wrap: word-wrap;
                     font-family: "monospace";
-                    font-size: 12px;
+                    font-size: 16px;
 
                     width: parent.width;
                     height: parent.height;
