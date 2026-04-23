@@ -4,7 +4,7 @@ set(APP_NAME "Cous Patcher")
 set(APP_EXECUTABLE "cous-patcher")
 set(APP_VERSION "1.0")
 
-set(SLINT_STYLE "fluent-dark" CACHE STRING "Slint Widget Style")
+set(SLINT_STYLE "fluent" CACHE STRING "Slint Widget Style")
 
 project(${APP_EXECUTABLE} CXX C)
 set(CMAKE_CXX_STANDARD 20)

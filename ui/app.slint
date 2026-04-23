@@ -6,7 +6,7 @@ export component AppWindow inherits Window {
     min-height: 420px;
     preferred-width: 600px;
     preferred-height: 480px;
-    background: #363636;
+    background: Palette.background;
 
     // Callbacks into C++
     callback browse-clicked();
@@ -25,10 +25,9 @@ export component AppWindow inherits Window {
         Text {
             text: "Target .app";
             font-size: 20px;
-            color: #acacac;
         }
 
-        HorizontalBox {
+        HorizontalLayout {
             padding: 4px;
             spacing: 12px;
 
@@ -49,7 +48,6 @@ export component AppWindow inherits Window {
         Text {
             text: "Fake process name";
             font-size: 20px;
-            color: #acacac;
         }
 
         LineEdit {
@@ -68,12 +66,11 @@ export component AppWindow inherits Window {
         Text {
             text: "Log";
             font-size: 16px;
-            color: #acacac;
         }
 
         Rectangle {
-            border-color: #454545;
-            background: #222;
+            border-color: Palette.border;
+            background: Palette.background;
             border-width: 2px;
             border-radius: 16px;
             vertical-stretch: 1;
